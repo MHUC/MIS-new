@@ -1,0 +1,63 @@
+﻿@model MIS.ViewModels.AtualRevenueBranchViewModel
+@{
+    ViewBag.Title = "Actual Revenue";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <h1 class="page-header">Actual Revenue</h1>
+
+  
+        <div class="col-md-3 col-md-push-9">
+            @using (Html.BeginForm("FilterBranch", "ActualRevenue"))
+            {
+
+                <div class="form-group">
+
+                    @Html.LabelFor(m => m.Branches)
+                    @Html.DropDownListFor(m => m.Actual.BranchId, new SelectList(Model.Branches, "Id", "Name"), "Select Branches", new { @class = "form-control" })
+                </div>
+
+
+                @Html.HiddenFor(m => m.Actual.BranchId)
+                <button type="submit" class="btn btn-primary">Save</button>
+
+            }
+
+            </div>
+
+
+
+
+
+
+
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Discount Rate</th>
+                            <th>Membership Type</th>
+                        </tr>
+                    </thead>
+                    <tr>
+                        @foreach (var ActualRevenue in Model.ActualRevenue)
+                        {
+
+                            <td> </td>
+                            <td>@ActualRevenue.Amount</td>
+                            <td>@ActualRevenue.WeekEndDate</td>
+
+
+                        }
+                    </tr>
+
+                </table>
+
+            </div>
+
+
+        </div>
+
+
