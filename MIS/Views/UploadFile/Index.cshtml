@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+
+    @using (Html.BeginForm("Upload", "UploadFile", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "return myFunction()" }))
+    {
+        <table>
+            <tr>
+                <td>File:</td>
+                <td>
+                    <input type="file" name="UploadedFile" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" name="Submit" value="Submit" />
+                </td>
+            </tr>
+        </table>
+    } 
+
+
+
+
+</div>
