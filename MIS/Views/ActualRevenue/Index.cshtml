@@ -25,37 +25,185 @@
             }
 
             </div>
+   
 
 
 
 
 
 
+    <div class="table-responsive-sm">
 
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>Discount Rate</th>
-                            <th>Membership Type</th>
-                        </tr>
-                    </thead>
-                    <tr>
-                        @foreach (var ActualRevenue in Model.ActualRevenue)
-                        {
-
-                            <td> </td>
-                            <td>@ActualRevenue.Amount</td>
-                            <td>@ActualRevenue.WeekEndDate</td>
+        <table class="table table-striped table-hover table-bordered">
 
 
-                        }
-                    </tr>
+            @{int mar = 0;}
+            @{int f = 0;}
+            @{int j = 0;}
+            @{int a = 0;}
+            @{int my = 0; }
+            @{string jan = ""; }
+            @{string feb = ""; }
+            @{string march = ""; }
+            @{string apr = ""; }
+            @{string may = ""; }
+            @foreach (var ActualRevenue in Model.ActualRevenue)
+            {
 
-                </table>
 
-            </div>
+                if (ActualRevenue.WeekEndDate.ToString("MMMM") == "January")
+                {
+                    j++;
+
+                    if (j == 4)
+                    {
+                        jan = "<td colspan=\"4\" class=\"text-center\">January</td>";
+                    }
+                    if (j == 5)
+                    {
+                        jan = "<td colspan=\"5\" class=\"text-center\">January</td>";
+                    }
+
+
+
+                }
+
+                if (ActualRevenue.WeekEndDate.ToString("MMMM") == "February")
+                {
+
+                    f++;
+
+                    if (f == 4)
+                    {
+                        feb = "<td colspan=\"4\" class=\"text-center\">February</td>";
+                    }
+                    if (f == 5)
+                    {
+                        feb = "<td colspan=\"5\" class=\"text-center\">JanuaryFebruary</td>";
+                    }
+                }
+
+                if (ActualRevenue.WeekEndDate.ToString("MMMM") == "March")
+                {
+                    mar++;
+
+                    if (mar == 4)
+                    {
+                        march = "<td colspan=\"4\" class=\"text-center\">March</td>";
+                    }
+                    if (mar == 5)
+                    {
+                        march = "<td colspan=\"5\" class=\"text-center\">March</td>";
+                    }
+                }
+
+
+
+
+                if (ActualRevenue.WeekEndDate.ToString("MMMM") == "April")
+                {
+                    a++;
+
+                    if (a == 4)
+                    {
+                        apr = "<td colspan=\"4\" class=\"text-center\">April</td>";
+                    }
+                    if (a == 5)
+                    {
+                        apr = "<td colspan=\"5\" class=\"text-center\">April</td>";
+                    }
+                }
+                if (ActualRevenue.WeekEndDate.ToString("MMMM") == "May")
+                {
+                    my++;
+
+                    if (my == 4)
+                    {
+                        may = "<td colspan=\"4\" class=\"text-center\">May</td>";
+                    }
+                    if (my == 5)
+                    {
+                        may = "<td colspan=\"5\" class=\"text-center\">May</td>";
+                    }
+                }
+
+            }
+
+            <thead>
+                <tr>
+
+                    @Html.Raw(jan)
+                    @Html.Raw(feb)
+                    @Html.Raw(march)
+                    @Html.Raw(apr)
+                    @Html.Raw(may)
+                </tr>
+
+            </thead>
+            <tr>
+
+                @{int i = 0;}
+                @foreach (var ActualRevenue in Model.ActualRevenue)
+                {
+
+
+
+                    if (ActualRevenue.WeekEndDate.ToString("MMMM") == "January")
+                    {
+                        i++;
+
+
+                        <td>Week @i<br />@ActualRevenue.Amount</td>
+
+                    }
+                    if (ActualRevenue.WeekEndDate.ToString("MMMM") == "February")
+                    {
+                        i++;
+
+
+                        <td>Week @i<br />@ActualRevenue.Amount</td>
+
+                    }
+                    if (ActualRevenue.WeekEndDate.ToString("MMMM") == "March")
+                    {
+                        i++;
+
+
+                        <td>Week @i<br />@ActualRevenue.Amount</td>
+
+                    }
+                    if (ActualRevenue.WeekEndDate.ToString("MMMM") == "April")
+                    {
+                        i++;
+
+
+                        <td>Week @i<br />@ActualRevenue.Amount</td>
+
+                    }
+                    if (ActualRevenue.WeekEndDate.ToString("MMMM") == "May")
+                    {
+                        i++;
+
+
+                        <td>Week @i<br />@ActualRevenue.Amount</td>
+
+                    }
+
+
+
+                }
+            </tr>
+
+        </table>
+
+
+
+
+
+    </div>
+
+
+
 
 
         </div>
