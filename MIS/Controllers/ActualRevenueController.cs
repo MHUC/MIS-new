@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using MIS.Models;
 using MIS.ViewModels;
 using System.Data.Entity;
+using System.Text.RegularExpressions;
 
 namespace MIS.Controllers
 {
@@ -61,5 +62,37 @@ namespace MIS.Controllers
 
             return View("Index", viewModel);
         }
+
+        [HttpPost]
+        public ActionResult UpdateActualRevenue(FormCollection Fc)
+        {
+            
+       
+
+            ActualRevenue p = new ActualRevenue();
+
+
+
+            foreach (var _key in Fc.Keys)
+            {
+                var id = Regex.Replace(_key.ToString(), "Amount_", "");
+                var _value = Fc[_key.ToString()];
+                
+
+                
+            }
+
+            
+
+
+
+            _context.SaveChanges();
+
+            return Redirect("Index");
+        }
+
+
+
+
     }
 }

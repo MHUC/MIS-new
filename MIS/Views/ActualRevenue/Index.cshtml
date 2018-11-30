@@ -27,13 +27,9 @@
             </div>
    
 
-
-
-
-
-
     <div class="table-responsive-sm">
-
+@using (Html.BeginForm("UpdateActualRevenue", "ActualRevenue"))
+{
         <table class="table table-striped table-hover table-bordered">
 
 
@@ -42,11 +38,13 @@
             @{int j = 0;}
             @{int a = 0;}
             @{int my = 0; }
+            @{int ju = 0; }
             @{string jan = ""; }
             @{string feb = ""; }
             @{string march = ""; }
             @{string apr = ""; }
             @{string may = ""; }
+            @{string June = ""; }
             @foreach (var ActualRevenue in Model.ActualRevenue)
             {
 
@@ -127,6 +125,21 @@
                     }
                 }
 
+
+                if (ActualRevenue.WeekEndDate.ToString("MMMM") == "June")
+                {
+                    my++;
+
+                    if (ju == 4)
+                    {
+                        June = "<td colspan=\"4\" class=\"text-center\">June</td>";
+                    }
+                    if (ju == 5)
+                    {
+                        June = "<td colspan=\"5\" class=\"text-center\">June</td>";
+                    }
+                }
+
             }
 
             <thead>
@@ -137,6 +150,7 @@
                     @Html.Raw(march)
                     @Html.Raw(apr)
                     @Html.Raw(may)
+                    @Html.Raw(June)
                 </tr>
 
             </thead>
@@ -153,59 +167,61 @@
                         i++;
 
 
-                        <td>Week @i<br />@ActualRevenue.Amount</td>
+                        <td>Week @i<br />@ActualRevenue.Amount
+                            <div class="form-group">@Html.TextBox("Amount_"+ @ActualRevenue.Id, @ActualRevenue.Amount, new {@class = "form-control", @style = "width:70px;" })  </div>
+                </td>
+                        
 
+                            }
+                            if (ActualRevenue.WeekEndDate.ToString("MMMM") == "February")
+                            {
+                            i++;
+
+
+                            <td>Week @i<br />@ActualRevenue.Amount
+                                <div class="form-group">@Html.TextBox("Amount_" + @ActualRevenue.Id, @ActualRevenue.Amount, new { @class = "form-control", @style = "width:70px;" })  </div>
+                </td>
+
+                            }
+                            if (ActualRevenue.WeekEndDate.ToString("MMMM") == "March")
+                            {
+                            i++;
+
+
+                            <td>Week @i<br />@ActualRevenue.Amount
+                                <div class="form-group">@Html.TextBox("Amount_" + @ActualRevenue.Id, @ActualRevenue.Amount, new { @class = "form-control", @style = "width:70px;" })  </div>
+                </td>
+
+                            }
+                            if (ActualRevenue.WeekEndDate.ToString("MMMM") == "April")
+                            {
+                            i++;
+
+
+                            <td>Week @i<br />@ActualRevenue.Amount
+                                <div class="form-group">@Html.TextBox("Amount_" + @ActualRevenue.Id, @ActualRevenue.Amount, new { @class = "form-control", @style = "width:70px;" })  </div>
+                </td>
+
+                            }
+                            if (ActualRevenue.WeekEndDate.ToString("MMMM") == "May")
+                            {
+                            i++;
+
+
+                            <td>Week @i<br />@ActualRevenue.Amount
+                                <div class="form-group">@Html.TextBox("Amount_" + @ActualRevenue.Id, @ActualRevenue.Amount, new { @class = "form-control", @style = "width:70px;" })  </div>
+                </td>
+
+                            }
+
+
+
+                            }
+</tr>
+
+        </table>        <button type="submit" class="btn btn-primary">Save</button>
                     }
-                    if (ActualRevenue.WeekEndDate.ToString("MMMM") == "February")
-                    {
-                        i++;
-
-
-                        <td>Week @i<br />@ActualRevenue.Amount</td>
-
-                    }
-                    if (ActualRevenue.WeekEndDate.ToString("MMMM") == "March")
-                    {
-                        i++;
-
-
-                        <td>Week @i<br />@ActualRevenue.Amount</td>
-
-                    }
-                    if (ActualRevenue.WeekEndDate.ToString("MMMM") == "April")
-                    {
-                        i++;
-
-
-                        <td>Week @i<br />@ActualRevenue.Amount</td>
-
-                    }
-                    if (ActualRevenue.WeekEndDate.ToString("MMMM") == "May")
-                    {
-                        i++;
-
-
-                        <td>Week @i<br />@ActualRevenue.Amount</td>
-
-                    }
-
-
-
-                }
-            </tr>
-
-        </table>
-
-
-
-
-
     </div>
-
-
-
-
-
-        </div>
+</div>
 
 
