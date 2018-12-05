@@ -66,30 +66,24 @@ namespace MIS.Controllers
         [HttpPost]
         public ActionResult UpdateActualRevenue(FormCollection Fc)
         {
-            
-       
-
-            ActualRevenue p = new ActualRevenue();
-
-
-
             foreach (var _key in Fc.Keys)
             {
-                var id = Regex.Replace(_key.ToString(), "Amount_", "");
+                var id = Convert.ToInt32(Regex.Replace(_key.ToString(), "Amount_", ""));
                 var _value = Fc[_key.ToString()];
+                var ActualReveneInDb = _context.ActualRevenues.Single(c => c.Id == id);
+                ActualReveneInDb.Amount = Convert.ToInt32(_value);
                 
 
                 
             }
-
-            
-
-
-
             _context.SaveChanges();
 
             return Redirect("Index");
         }
+
+
+
+
 
 
 
