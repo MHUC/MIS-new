@@ -17,7 +17,7 @@
                     @Html.LabelFor(m => m.Branches)
                     @Html.DropDownListFor(m => m.Actual.BranchId, new SelectList(Model.Branches, "Id", "Name"), "Select Branches", new { @class = "form-control" })
                 </div>
-     
+                @Html.Hidden("returnUrl", "Index")
                 @Html.HiddenFor(m => m.Actual.BranchId)
                 <button type="submit" class="btn btn-primary">Save</button>
 

@@ -1,0 +1,121 @@
+﻿@model MIS.ViewModels.AtualRevenueBranchViewModel
+@{
+    ViewBag.Title = "GraphView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+@section Scripts
+{
+<script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script> 
+
+}
+<h2>Actual Revenue Graph</h2>
+
+
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+    <div class="col-md-3">
+        @using (Html.BeginForm("FilterBranch", "ActualRevenue"))
+            {
+
+            <div class="form-group">
+
+                @Html.LabelFor(m => m.Branches)
+                @Html.DropDownListFor(m => m.Actual.BranchId, new SelectList(Model.Branches, "Id", "Name"), "Select Branches", new { @class = "form-control" })
+            </div>
+ 
+            @Html.HiddenFor(m => m.Actual.BranchId)
+            <button type="submit" class="btn btn-primary">Save</button>
+
+        }
+
+    </div>
+    </div>
+
+
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <div id="chartContainer"></div>
+
+@foreach (var ActualRevenue in Model.ActualRevenue)
+{
+
+
+   @ActualRevenue.Amount
+}
+    </div>
+
+
+
+<script type="text/javascript">
+    window.onload = function() {
+      var chart = new CanvasJS.Chart("chartContainer", {
+        title: {
+          text: "Actual Revenue"
+        },
+        subtitles: [
+                 {
+                     text: "Try Zooming and Panning"
+                 }],
+        axisX: [{
+          title: "",
+          lineColor: "#369EAD",
+        }, {
+            title: "",
+            lineColor: "black",
+        }
+       ],
+
+        data: [{
+          type: "line",
+          axisXIndex: 0, //defaults to 0
+          dataPoints: [
+            { x: 10, y: 6,},
+            { x: 20, y: 2,},
+            { x: 30, y: 5,},
+            { x: 40, y: 7,},
+            { x: 50, y: 1,},
+            { x: 60, y: 5,},
+            { x: 70, y: 5,},
+            { x: 80, y: 2,},
+            { x: 90, y: 2,}
+          ]
+        },
+        {
+            type: "line",
+            axisXIndex: 0,
+            dataPoints: [
+            { x: 10, y: 2, },
+            { x: 20, y: 4, },
+            { x: 30, y: 7, },
+            { x: 40, y: 8, },
+            { x: 50, y: 9, },
+            { x: 60, y: 7, },
+            { x: 70, y: 5, },
+            { x: 80, y: 2, },
+            { x: 90, y: 2, }
+            ]
+        },
+        {
+          type: "line",
+          axisXIndex: 1,
+          dataPoints: [
+                { label: "Jan"},
+                { label: "Feb" },
+                { label: "March" },
+                { label: "April"},
+                { label: "May"},
+                { label: "June"},
+                { label: "July"},
+                { label: "Aug"},
+                { label: "Sep" },
+                { label: "Oct" },
+                { label: "Nov"},
+                { label: "Dec" }
+          ]
+        }, ]
+      });
+      chart.render();
+    }
+</script>

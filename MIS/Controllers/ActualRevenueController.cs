@@ -45,6 +45,23 @@ namespace MIS.Controllers
         }
 
 
+        public ActionResult GraphView()
+        {
+
+            var branch = _context.Branches.ToList();
+            var ActualRevenue = _context.ActualRevenues.Where(c => c.BranchId == 4).ToList();
+
+            var viewModel = new AtualRevenueBranchViewModel
+            {
+
+                Branches = branch,
+                ActualRevenue = ActualRevenue
+            };
+
+            return View("GraphView",viewModel);
+
+        }
+
         [HttpPost]
         public ActionResult FilterBranch(ActualRevenue Actual)
         {
