@@ -1,6 +1,6 @@
 ﻿@model MIS.ViewModels.AtualRevenueBranchViewModel
 @{
-    ViewBag.Title = "GraphView";
+    ViewBag.Title = "Actual Revenue Graph - MIS";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
 }
@@ -14,9 +14,8 @@
 <h2>Actual Revenue Graph</h2>
 
 
-<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
-    <div class="col-md-3">
+    <div class="col-md-3 row">
         @using (Html.BeginForm("FilterBranch", "ActualRevenue"))
             {
 
@@ -27,95 +26,135 @@
             </div>
  
             @Html.HiddenFor(m => m.Actual.BranchId)
+            @Html.Hidden("BackView", "GraphView")
+            
             <button type="submit" class="btn btn-primary">Save</button>
 
         }
 
     </div>
-    </div>
+    
+<br /><br /><br /><br /><br /><br />
 
+@if (Model.ActualRevenue.Any())
+{
 
-    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <div class="row" style="width:3800px; float:left;">
         <div id="chartContainer"></div>
 
 @foreach (var ActualRevenue in Model.ActualRevenue)
 {
 
 
-   @ActualRevenue.Amount
+   @*@ActualRevenue.WeekEndDate.ToString("yyyy,MM,dd") <br/><br/>
+<br /> @ActualRevenue.Amount*@
 }
     </div>
 
 
 
 <script type="text/javascript">
-    window.onload = function() {
-      var chart = new CanvasJS.Chart("chartContainer", {
-        title: {
-          text: "Actual Revenue"
-        },
-        subtitles: [
-                 {
-                     text: "Try Zooming and Panning"
-                 }],
-        axisX: [{
-          title: "",
-          lineColor: "#369EAD",
-        }, {
-            title: "",
-            lineColor: "black",
-        }
-       ],
+    window.onload = function () {
 
-        data: [{
-          type: "line",
-          axisXIndex: 0, //defaults to 0
-          dataPoints: [
-            { x: 10, y: 6,},
-            { x: 20, y: 2,},
-            { x: 30, y: 5,},
-            { x: 40, y: 7,},
-            { x: 50, y: 1,},
-            { x: 60, y: 5,},
-            { x: 70, y: 5,},
-            { x: 80, y: 2,},
-            { x: 90, y: 2,}
-          ]
-        },
-        {
-            type: "line",
-            axisXIndex: 0,
-            dataPoints: [
-            { x: 10, y: 2, },
-            { x: 20, y: 4, },
-            { x: 30, y: 7, },
-            { x: 40, y: 8, },
-            { x: 50, y: 9, },
-            { x: 60, y: 7, },
-            { x: 70, y: 5, },
-            { x: 80, y: 2, },
-            { x: 90, y: 2, }
+        var dataPoints1 = [];
+        var dataPoints2 = [];
+        var week = []
+
+        var yy1 = [@string.Join(",", Model.ActualRevenue.Where(w => w.WeekEndDate.ToString("yyyy") == "2017").Select(x => x.WeekEndDate.ToString("yyyy")).ToArray())];
+        var MM1 = [@string.Join(",", Model.ActualRevenue.Where(w => w.WeekEndDate.ToString("yyyy") == "2017").Select(x => x.WeekEndDate.ToString("MM")).ToArray())];
+        var dd1 = [@string.Join(",", Model.ActualRevenue.Where(w => w.WeekEndDate.ToString("yyyy") == "2017").Select(x => x.WeekEndDate.ToString("dd")).ToArray())];
+        var amnount1 = [@string.Join(",", Model.ActualRevenue.Where(w => w.WeekEndDate.ToString("yyyy") == "2017").Select(x => x.Amount).ToArray())];
+
+        var yy2 = [@string.Join(",", Model.ActualRevenue.Where(w => w.WeekEndDate.ToString("yyyy") == "2018").Select(x => x.WeekEndDate.ToString("yyyy")).ToArray())];
+        var MM2= [@string.Join(",", Model.ActualRevenue.Where(w => w.WeekEndDate.ToString("yyyy") == "2018").Select(x => x.WeekEndDate.ToString("MM")).ToArray())];
+        var dd2 = [@string.Join(",", Model.ActualRevenue.Where(w => w.WeekEndDate.ToString("yyyy") == "2018").Select(x => x.WeekEndDate.ToString("dd")).ToArray())];
+        var amnount2 = [@string.Join(",", Model.ActualRevenue.Where(w => w.WeekEndDate.ToString("yyyy") == "2018").Select(x => x.Amount).ToArray())];
+
+       
+     //   alert(JSON.stringify(week));
+        for (var i = 1; i < 52; i++) {
+            dataPoints1.push({               
+             //   x: new Date(yy1[i], pad(MM1[i], 2)-1, pad(dd1[i], 2)),
+                y: amnount1[i],
+                label: "Week" + (i + 1)
+            });           
+        }
+        for (var x = 0; x < amnount2.length; x++) {
+            dataPoints2.push({
+             //   x: new Date(yy2[x], pad(MM2[x], 2) - 1, pad(dd2[x], 2)),
+                y: amnount2[x],
+                label: "Week" + (x + 1)
+            });
+        }
+
+
+
+
+
+       // alert(JSON.stringify(dataPoints));
+        var chart = new CanvasJS.Chart("chartContainer", {
+            title: {
+                text: "Actual Revenue"
+            },
+            legend: {
+                fontSize: 9
+            },
+            subtitles: [
+                     {
+                         text: "ACTUAL WEEKLY REVENUE MYHOME Mt ELIZA - 2017/2018"
+                     }],
+            axisY: {
+                title: "Amount $",
+                labelFontSize: 10
+            },
+            axisX: [{
+                title: "Month",
+                lineColor: "#369EAD",
+                labelFontSize: 10,
+             
+            }, {
+                title: "",
+                lineColor: "black",
+            }
+            ],
+
+            data: [{
+                type: "stackedArea",
+                dataPoints: dataPoints1
+            },
+            {
+                type: "stackedArea",
+                dataPoints: dataPoints2
+            },
+            {
+                type: "line",
+                axisXIndex: 1,
+                dataPoints: [
+                      { label: "Jan" },
+                      { label: "Feb" },
+                      { label: "March" },
+                      { label: "April" },
+                      { label: "May" },
+                      { label: "June" },
+                      { label: "July" },
+                      { label: "Aug" },
+                      { label: "Sep" },
+                      { label: "Oct" },
+                      { label: "Nov" },
+                      { label: "Dec" }
+                ]
+            },
             ]
-        },
-        {
-          type: "line",
-          axisXIndex: 1,
-          dataPoints: [
-                { label: "Jan"},
-                { label: "Feb" },
-                { label: "March" },
-                { label: "April"},
-                { label: "May"},
-                { label: "June"},
-                { label: "July"},
-                { label: "Aug"},
-                { label: "Sep" },
-                { label: "Oct" },
-                { label: "Nov"},
-                { label: "Dec" }
-          ]
-        }, ]
-      });
-      chart.render();
+        });
+        chart.render();
+    }
+
+
+
+    function pad(num, size) {
+        var s = num + "";
+        while (s.length < size) s = "0" + s;
+        return s;
     }
 </script>
+}

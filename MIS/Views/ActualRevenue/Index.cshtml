@@ -1,10 +1,10 @@
 ﻿@model MIS.ViewModels.AtualRevenueBranchViewModel
 @{
-    ViewBag.Title = "Actual Revenue";
+    ViewBag.Title = "Actual Revenue - MIS";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+<div>
     <h1 class="page-header">Actual Revenue</h1>
 
   
@@ -17,7 +17,7 @@
                     @Html.LabelFor(m => m.Branches)
                     @Html.DropDownListFor(m => m.Actual.BranchId, new SelectList(Model.Branches, "Id", "Name"), "Select Branches", new { @class = "form-control" })
                 </div>
-                @Html.Hidden("returnUrl", "Index")
+                @Html.Hidden("BackView", "Index")
                 @Html.HiddenFor(m => m.Actual.BranchId)
                 <button type="submit" class="btn btn-primary">Save</button>
 
@@ -32,8 +32,8 @@
     <div class="table-responsive-sm">
 @using (Html.BeginForm("UpdateActualRevenue", "ActualRevenue"))
 {
-    @Html.ActionLink("Click to Update", "", new { onclick = "updateDiv();" })
-
+   
+    @Html.ActionLink("Click to Update", null, null, new { @onclick = "return updateDiv(this);" })
 
     for (int count = 2017; count <= 2018; count++)
 
@@ -198,7 +198,7 @@
 
 
                         <td>Week @i<br />@ActualRevenue.Amount
-                            <div class="form-group inputdiv">@Html.TextBox("Amount_" + @ActualRevenue.Id, @ActualRevenue.Amount, new { @class = "form-control", @style = "width:70px;" })  </div>
+                            <div class="form-group inputdivhide">@Html.TextBox("Amount_" + @ActualRevenue.Id, @ActualRevenue.Amount, new { @class = "form-control", @style = "width:70px;" })  </div>
                 </td>
 
 
@@ -209,7 +209,7 @@
 
 
                             <td>Week @i<br />@ActualRevenue.Amount 
-                                <div class="form-group inputdiv">@Html.TextBox("Amount_" + @ActualRevenue.Id, @ActualRevenue.Amount, new { @class = "form-control", @style = "width:70px;" })  </div>
+                                <div class="form-group inputdivhide">@Html.TextBox("Amount_" + @ActualRevenue.Id, @ActualRevenue.Amount, new { @class = "form-control", @style = "width:70px;" })  </div>
                 </td>
 
                         }
@@ -219,7 +219,7 @@
 
 
                             <td>Week @i<br />@ActualRevenue.Amount
-                                <div class="form-group inputdiv">@Html.TextBox("Amount_" + @ActualRevenue.Id, @ActualRevenue.Amount, new { @class = "form-control", @style = "width:70px;" })  </div>
+                                <div class="form-group inputdivhide">@Html.TextBox("Amount_" + @ActualRevenue.Id, @ActualRevenue.Amount, new { @class = "form-control", @style = "width:70px;" })  </div>
                 </td>
 
                         }
@@ -229,7 +229,7 @@
 
 
                             <td>Week @i<br />@ActualRevenue.Amount
-                                <div class="form-group inputdiv">@Html.TextBox("Amount_" + @ActualRevenue.Id, @ActualRevenue.Amount, new { @class = "form-control", @style = "width:70px;" })  </div>
+                                <div class="form-group inputdivhide">@Html.TextBox("Amount_" + @ActualRevenue.Id, @ActualRevenue.Amount, new { @class = "form-control", @style = "width:70px;" })  </div>
                 </td>
 
                         }
@@ -239,7 +239,7 @@
 
 
                             <td>Week @i<br />@ActualRevenue.Amount
-                                <div class="form-group inputdiv">@Html.TextBox("Amount_" + @ActualRevenue.Id, @ActualRevenue.Amount, new { @class = "form-control", @style = "width:70px;" })  </div>
+                                <div class="form-group inputdivhide">@Html.TextBox("Amount_" + @ActualRevenue.Id, @ActualRevenue.Amount, new { @class = "form-control", @style = "width:70px;" })  </div>
                 </td>
 
                         }
@@ -251,7 +251,7 @@
 
                         <td>
                             Week @i<br />@ActualRevenue.Amount
-                            <div class="form-group inputdiv">@Html.TextBox("Amount_" + @ActualRevenue.Id, @ActualRevenue.Amount, new { @class = "form-control", @style = "width:70px;" })  </div>
+                            <div class="form-group inputdivhide">@Html.TextBox("Amount_" + @ActualRevenue.Id, @ActualRevenue.Amount, new { @class = "form-control", @style = "width:70px;" })  </div>
                         </td>
 
                         }
@@ -263,7 +263,7 @@
 
                         <td>
                             Week @i<br />@ActualRevenue.Amount
-                            <div class="form-group inputdiv">@Html.TextBox("Amount_" + @ActualRevenue.Id, @ActualRevenue.Amount, new { @class = "form-control", @style = "width:70px;" })  </div>
+                            <div class="form-group inputdivhide">@Html.TextBox("Amount_" + @ActualRevenue.Id, @ActualRevenue.Amount, new { @class = "form-control", @style = "width:70px;" })  </div>
                         </td>
 
                         }
@@ -275,7 +275,7 @@
 
                         <td>
                             Week @i<br />@ActualRevenue.Amount
-                            <div class="form-group inputdiv">@Html.TextBox("Amount_" + @ActualRevenue.Id, @ActualRevenue.Amount, new { @class = "form-control", @style = "width:70px;" })  </div>
+                            <div class="form-group inputdivhide">@Html.TextBox("Amount_" + @ActualRevenue.Id, @ActualRevenue.Amount, new { @class = "form-control", @style = "width:70px;" })  </div>
                         </td>
 
                         }
@@ -286,7 +286,7 @@
 
                         <td>
                             Week @i<br />@ActualRevenue.Amount
-                            <div class="form-group inputdiv">@Html.TextBox("Amount_" + @ActualRevenue.Id, @ActualRevenue.Amount, new { @class = "form-control", @style = "width:70px;" })  </div>
+                            <div class="form-group inputdivhide">@Html.TextBox("Amount_" + @ActualRevenue.Id, @ActualRevenue.Amount, new { @class = "form-control", @style = "width:70px;" })  </div>
                         </td>
 
                         }
@@ -298,7 +298,7 @@
 
                         <td>
                             Week @i<br />@ActualRevenue.Amount
-                            <div class="form-group inputdiv">@Html.TextBox("Amount_" + @ActualRevenue.Id, @ActualRevenue.Amount, new { @class = "form-control", @style = "width:70px;" })  </div>
+                            <div class="form-group inputdivhide">@Html.TextBox("Amount_" + @ActualRevenue.Id, @ActualRevenue.Amount, new { @class = "form-control", @style = "width:70px;" })  </div>
                         </td>
 
                         }
@@ -310,7 +310,7 @@
 
                         <td>
                             Week @i<br />@ActualRevenue.Amount
-                            <div class="form-group inputdiv">@Html.TextBox("Amount_" + @ActualRevenue.Id, @ActualRevenue.Amount, new { @class = "form-control", @style = "width:70px;" })  </div>
+                            <div class="form-group inputdivhide">@Html.TextBox("Amount_" + @ActualRevenue.Id, @ActualRevenue.Amount, new { @class = "form-control", @style = "width:70px;" })  </div>
                         </td>
 
                         }
@@ -322,7 +322,7 @@
 
                         <td>
                             Week @i<br />@ActualRevenue.Amount
-                            <div class="form-group inputdiv">@Html.TextBox("Amount_" + @ActualRevenue.Id, @ActualRevenue.Amount, new { @class = "form-control", @style = "width:70px;" })  </div>
+                            <div class="form-group inputdivhide">@Html.TextBox("Amount_" + @ActualRevenue.Id, @ActualRevenue.Amount, new { @class = "form-control", @style = "width:70px;" })  </div>
                         </td>
 
                         }
@@ -332,22 +332,42 @@
 
         </table>        
                     }
-        <button type="submit" class="btn btn-primary inputdiv">Save</button>
+        <button type="submit" class="btn btn-primary inputdivhide">Save</button>  <button id="updateCancel" type="submit" class="btn btn-primary inputdivhide">Cancel</button>
                     }
     </div>
                     }
 </div>
-                    
+                    <button id="update" class="btn btn-success inputdivblock">Click to Update</button>
 
 
 @section Scripts {
 
     <script type="text/javascript">
        
+  
+        function updateDiv() {
+            alert("hello");
+            document.getElementsByClassName('inputdivhide')[0].style.display = 'block';     
+        }
 
-            function updateDiv() {
-                alert("hello");
-            }
+
+
+        $("#update").click(function () {
+           // alert("hello");
+         
+            $(".inputdivhide").removeClass("inputdivhide");
+            $("#update").removeClass("inputdivblock");
+            $("#update").addClass("inputdivhide");
+        });
+        $("#updateCancel").click(function () {
+         //   alert("hello");
+        
+            $(".inputdivhide").removeClass("inputdivblock");
+            $("#update").removeClass("inputdivhide");
+            $("#update").addClass("inputdivblock");
+        });
+
+
        
     </script>
 }

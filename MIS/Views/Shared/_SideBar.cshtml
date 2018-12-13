@@ -1,8 +1,15 @@
 ﻿
-<div class="col-sm-3 col-md-2 sidebar">
+<div class="col-sm-3 col-md-1 sidebar">
     <ul class="nav nav-sidebar">
         <li class="active"><a href="#">Overview</a></li>
-        <li>@Html.ActionLink("Actual Revenue", "Index", "ActualRevenue")</li>
+        <li>@Html.ActionLink("Actual Revenue", "Index", "ActualRevenue")
+            <ul class="nav submenu">
+                <li>@Html.ActionLink("Graphical View", "GraphView", "ActualRevenue")</li>
+                <li><a href="#">Update Record</a></li>
+                <li>@Html.ActionLink("Import Records", "Index", "UploadFile")</li>
+            </ul>
+        
+        </li>
         <li><a href="#">Analytics</a></li>
         <li><a href="#">Export</a></li>
     </ul>

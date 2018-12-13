@@ -6,7 +6,7 @@
 
 <h2>Import Data</h2>
 
-<div class="col-md-3 col-md-push-9">
+<div class="col-md-3">
     @using (Html.BeginForm("FilterBranch", "UploadFile"))
             {
 
@@ -27,20 +27,26 @@
 
 
 
+<br /><br /><br /><br /><br /><br />
 
-<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-
-
-@using (Html.BeginForm("Import", "UploadFile", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    @Html.Raw(ViewBag.Error)
-    <span>Excel File </span><input type="file" name="excelfile" />
-        <br />
-        @Html.HiddenFor(m => m.Actual.BranchId)
-        <input type="submit" value="Import" />
-}
+              @using (Html.BeginForm("Import", "UploadFile", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.Raw(ViewBag.Error)
 
 
+                <div class="form-group files color">
+                    <label>Upload Your File </label>
+
+                    <input name="excelfile" type="file" class="form-control" multiple="">
+                </div>
+
+                    <br />
+                    @Html.HiddenFor(m => m.Actual.BranchId)
+                    <input class="btn btn-primary center-block" type="submit" value="Import" />
+                    }
 
 
-</div>
+
+
+                   
+               

@@ -58,12 +58,14 @@ namespace MIS.Controllers
                 ActualRevenue = ActualRevenue
             };
 
+
+
             return View("GraphView",viewModel);
 
         }
 
         [HttpPost]
-        public ActionResult FilterBranch(ActualRevenue Actual)
+        public ActionResult FilterBranch(ActualRevenue Actual, FormCollection FC)
         {
 
            
@@ -77,7 +79,7 @@ namespace MIS.Controllers
                 ActualRevenue = ActualRevenue
             };
 
-            return View("Index", viewModel);
+            return View(FC["BackView"], viewModel);
         }
 
         [HttpPost]
